@@ -27,25 +27,29 @@ function WithdrawMsg(props){
 
 function WithdrawForm(props){
   const [email, setEmail]   = React.useState('');
-  const [amount, setAmount] = React.useState('');
-  const ctx = React.useContext(UserContext);  
+  const [amount, setAmount] = React.useState('');  
 
   function handle(){
     console.log(email,amount);
-    const user = ctx.users.find((user) => user.email == email);
+    const url = `/account/withdraw/${email}/${amount}`;
+      (async () => {
+        var res = await fetch(url);
+        var data = await res.json();
+        console.log(data); 
+      })(); 
+      props.setShow(false);
+  
     if (!user) {
       props.setStatus('fail!')      
       return;      
-    }
-
+    } 
     user.balance = user.balance - Number(amount);
     console.log(user);
     props.setStatus('');      
     props.setShow(false);
-  }
+  };
 
-
-  return(<>
+  return (<>
 
     Email<br/>
     <input type="input" 
@@ -68,4 +72,4 @@ function WithdrawForm(props){
     </button>
 
   </>);
-}
+  }

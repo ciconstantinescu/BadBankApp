@@ -1,4 +1,5 @@
 function Balance(){
+  const [user, setUser]     = React.useState('');
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
 
@@ -29,10 +30,17 @@ function BalanceMsg(props){
 function BalanceForm(props){
   const [email, setEmail]   = React.useState('');
   const [balance, setBalance] = React.useState('');  
-  const ctx = React.useContext(UserContext);  
-
+  
   function handle(){
-    const user = ctx.users.find((user) => user.email == email);
+      console.log(email,balance);
+      const url = `/account/balance/${email}/${balance}`;
+      (async () => {
+        var res = await fetch(url);
+        var data = await res.json();
+        console.log(data); 
+      })(); 
+      props.setShow(false);
+  
     if (!user) {
       props.setStatus('fail!')      
       return;      

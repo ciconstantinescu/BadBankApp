@@ -26,17 +26,23 @@ function DepositMsg(props){
 } 
 
 function DepositForm(props){
+  const [user, setUser]     = React.useState('');
   const [email, setEmail]   = React.useState('');
-  const [amount, setAmount] = React.useState('');
-  const ctx = React.useContext(UserContext);  
+  const [amount, setAmount] = React.useState('');  
 
   function handle(){
     console.log(email,amount);
-    const user = ctx.users.find((user) => user.email == email);
+    const url = `/account/deposit/${email}/${amount}`;
+      (async () => {
+        var res = await fetch(url);
+        var data = await res.text();
+        console.log(amount); 
+      })(); 
+
     if (!user) {
       props.setStatus('fail!');
       return;      
-    }
+    } 
 
     user.balance = user.balance + Number(amount);
     console.log(user);

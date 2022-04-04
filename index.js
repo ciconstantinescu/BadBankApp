@@ -14,6 +14,62 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
         });
     });  
 
+app.get('/account/login/:email/:password', function (req, res) {
+    dal.create(req.params.email,req.params.password)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    }); 
+
+app.get('/account/find/:email', function (req, res) {
+    dal.create(req.params.email)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    }); 
+
+app.get('/account/findUser/:email', function (req, res) {
+    dal.create(req.params.email)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    }); 
+
+app.get('/account/deposit/:email/:amount', function (req, res) {
+    dal.create(req.params.email, req.params.amount)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    });  
+
+app.get('/account/withdraw/:email/:amount', function (req, res) {
+    dal.create(req.params.email, req.params.amount)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    });    
+
+app.get('/account/updateBalance/:email/:amount', function (req, res) {
+    dal.create(req.params.email, req.params.password)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    });
+
+app.post('/account/updateBalance/:email/:amount', function (req, res) {
+    dal.create(req.params.email, req.params.password)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    });
+
 app.get('/account/all', function (req, res) {
     dal.all()
         .then((docs) => {

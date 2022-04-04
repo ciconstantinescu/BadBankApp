@@ -1,3 +1,17 @@
+// import fire from '../../fire.js';
+
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+    fire.auth().onAuthStateChanged((user) => {
+      return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+  
+  const signOut = () => {
+    fire.auth().signOut()
+  };
+}
+
 function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');    

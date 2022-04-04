@@ -32,22 +32,12 @@ function DepositForm(props){
 
   function handle(){
     console.log(email,amount);
-    const url = `/account/deposit/${email}/${amount}`;
+    const url = `http://localhost:3000/account/deposit/${email}/${amount}`;
       (async () => {
         var res = await fetch(url);
         var data = await res.text();
         console.log(amount); 
       })(); 
-
-    if (!user) {
-      props.setStatus('fail!');
-      return;      
-    } 
-
-    user.balance = user.balance + Number(amount);
-    console.log(user);
-    props.setStatus('');      
-    props.setShow(false);
   }
 
   return(<>

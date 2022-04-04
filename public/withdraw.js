@@ -43,10 +43,6 @@ function WithdrawForm(props){
       props.setStatus('fail!')      
       return;      
     } 
-    user.balance = user.balance - Number(amount);
-    console.log(user);
-    props.setStatus('');      
-    props.setShow(false);
   };
 
   return (<>

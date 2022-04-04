@@ -54,8 +54,8 @@ app.get('/account/withdraw/:email/:amount', function (req, res) {
         });
     });    
 
-app.get('/account/updateBalance/:email/:amount', function (req, res) {
-    dal.create(req.params.email, req.params.password)
+app.get('/account/updateBalance/:email', function (req, res) {
+    dal.create(req.params.email)
         .then((user) => {
         console.log(user);
         res.send(user);

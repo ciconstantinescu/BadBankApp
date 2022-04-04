@@ -29,6 +29,16 @@ function find(email) {
     })
 }
 
+function login(email, password) {
+    return new Promise((resolve, reject) => {
+        const collection = db.collection('users');
+        const doc = {email, password};
+        collection.insertOne(doc, {w:1}, function(err, result) {
+            err? reject(err) : resolve(doc);
+        });
+    })
+}
+
 function deposit (email, amount) {
     const newBalance = balance + Number(amount);
     console.log(balance);

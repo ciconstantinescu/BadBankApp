@@ -65,7 +65,7 @@ function withdraw (email, amount) {
         });
 }
 
-function findUser (name, email) {
+function findOne (name, email) {
     const customers = db
         .collection('users')
         .find({name: name}, {email: email}, {balance: amount})
@@ -74,11 +74,11 @@ function findUser (name, email) {
         });
 }
 
-function updateBalance(name, email, balance) {
+function updateOne(name, email, balance) {
     return new Promise ((resolve, reject) => {
         const customers = db
             .collection('users')
-            .findUserAndUpdateBalance(
+            .findOneAndUpdateOne(
                 {name: name},
                 {email: email}, 
                 {balance: amount}, 
@@ -99,4 +99,4 @@ function all() {
     })
 }
 
-module.exports = {create, find, findUser, updateBalance, all}
+module.exports = {create, find, findOne, updateOne, all}

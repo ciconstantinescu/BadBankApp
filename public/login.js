@@ -1,22 +1,21 @@
-import fire from 'index.html';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
-function Login() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');    
-  
-    fire.auth().onAuthStateChanged((user) => {
-      return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
-  
-  const signOut = () => {
-    fire.auth().signOut()
-  };
 
-
-// function Login(){
-  
   return (
     <Card
       bgcolor="secondary"
@@ -27,62 +26,60 @@ function Login() {
         <LoginMsg setShow={setShow} setStatus={setStatus}/>}
     />
   ) 
+}
 
+function LoginMsg(props){
+  return(<>
+    <h5>Success</h5>
+    <button type="submit" 
+      className="btn btn-light" 
+      onClick={() => props.setShow(true)}>
+        Authenticate again
+    </button>
+  </>);
+}
 
-// function LoginMsg(props){
-//   return(<>
-//     <h5>Success</h5>
-//     <button type="submit" 
-//       className="btn btn-light" 
-//       onClick={() => props.setShow(true)}>
-//         Authenticate again
-//     </button>
-//   </>);
-// }
+function LoginForm(props){
+  const [email, setEmail]       = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const ctx = React.useContext(UserContext);  
 
-// function LoginForm(props){
-//   const [email, setEmail]       = React.useState('');
-//   const [password, setPassword] = React.useState('');
+  function handle(){
+    const user = ctx.users.find((user) => user.email == email);
+    console.log(user);
+    console.log(email, password);
+    if (!user) {
+      console.log('one')      
+      props.setStatus('fail!')      
+      return;      
+    }
+    if (user.password == password) {
+      console.log('two')            
+      props.setStatus('');
+      props.setShow(false);
+      return;      
+    }
+    console.log('three')          
+    props.setStatus('fail!');        
+  }
 
-//   const ctx = React.useContext(UserContext);  
+  return (<>
 
-//   function handle(){
-//     const user = ctx.users.find((user) => user.email == email);
-//     console.log(user);
-//     console.log(email, password);
-//     if (!user) {
-//       console.log('one')      
-//       props.setStatus('fail!')      
-//       return;      
-//     }
-//     if (user.password == password) {
-//       console.log('two')            
-//       props.setStatus('');
-//       props.setShow(false);
-//       return;      
-//     }
-//     console.log('three')          
-//     props.setStatus('fail!');        
-//   }
+    Email<br/>
+    <input type="input" 
+      className="form-control" 
+      placeholder="Enter email" 
+      value={email} 
+      onChange={e => setEmail(e.currentTarget.value)}/><br/>
 
+    Password<br/>
+    <input type="password" 
+      className="form-control" 
+      placeholder="Enter password" 
+      value={password} 
+      onChange={e => setPassword(e.currentTarget.value)}/><br/>
 
-  // return (<>
-
-  //   Email<br/>
-  //   <input type="input" 
-  //     className="form-control" 
-  //     placeholder="Enter email" 
-  //     value={email} 
-  //     onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-  //   Password<br/>
-  //   <input type="password" 
-  //     className="form-control" 
-  //     placeholder="Enter password" 
-  //     value={password} 
-  //     onChange={e => setPassword(e.currentTarget.value)}/><br/>
-
-  //   <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
+    <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
    
-  // </>);
+  </>);
 }

@@ -1,6 +1,7 @@
 function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
+  const accessToken = localStorage.getItem('token');
 
   return (
     <Card

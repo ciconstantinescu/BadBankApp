@@ -1,5 +1,3 @@
-// import firebase from 'firebase';
-
 const firebaseConfig = {
     apiKey: "AIzaSyCSXRKF4mmypNtQa3H8RAsc55067lvhvwE",
     authDomain: "capstone-ae2f7.firebaseapp.com",
@@ -18,5 +16,3 @@ try {
   }
   
   const fire = firebase;
-
-  // export default fire;

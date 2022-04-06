@@ -1,7 +1,8 @@
 function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const accessToken = localStorage.getItem('token');
+  const [user, setUser] = React.useState('');
+
 
   return (
     <Card
@@ -16,6 +17,12 @@ function Withdraw(){
 }
 
 function WithdrawMsg(props){
+  const [status, setStatus] = React.useState(''); 
+  if (!user) {
+    props.setStatus('fail!')      
+    return;      
+  } 
+
   return(<>
     <h5>Success</h5>
     <button type="submit" 
@@ -24,15 +31,17 @@ function WithdrawMsg(props){
         Withdraw again
     </button>
   </>);
+  
 }
 
 function WithdrawForm(props){
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');  
+  const [user, setUser] = React.useState('');
 
   function handle(){
     console.log(email,amount);
-    const url = `/account/withdraw/${email}/${amount}`;
+    const url = `http://localhost:3000/account/withdraw/${email}/${amount}`;
       (async () => {
         var res = await fetch(url);
         var data = await res.json();
@@ -40,10 +49,6 @@ function WithdrawForm(props){
       })(); 
       props.setShow(false);
   
-    if (!user) {
-      props.setStatus('fail!')      
-      return;      
-    } 
   };
 
   return (<>

@@ -15,7 +15,7 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
     });  
 
 app.get('/account/login/:email/:password', function (req, res) {
-    dal.find(req.params.email,req.params.password)
+    dal.login(req.params.email,req.params.password)
         .then((user) => {
         console.log(user);
         res.send(user);
@@ -38,8 +38,8 @@ app.get('/account/findOne/:email', function (req, res) {
         });
     }); 
 
-app.get('/account/deposit/:email/:amount', function (req, res) {
-    dal.update(req.params.email, req.params.amount)
+app.get('/account/deposit/', function (req, res) {
+    dal.deposit(req.params.email, req.params.amount)
         .then((user) => {
         console.log(user);
         res.send(user);
@@ -47,7 +47,7 @@ app.get('/account/deposit/:email/:amount', function (req, res) {
     });  
 
 app.get('/account/withdraw/:email/:amount', function (req, res) {
-    dal.update(req.params.email, req.params.amount)
+    dal.withdraw(req.params.email, req.params.amount)
         .then((user) => {
         console.log(user);
         res.send(user);

@@ -40,8 +40,8 @@ function login(email, password) {
 }
 
 function deposit (email, amount) {
-    const newBalance = balance + Number(amount);
-    console.log(balance);
+    // const newBalance = balance + Number(amount);
+    // console.log(balance);
   
     const customers = db
         .collection('users')
@@ -99,4 +99,4 @@ function all() {
     })
 }
 
-module.exports = {create, find, findOne, updateOne, all}
+module.exports = {create, find, findOne, updateOne, deposit, withdraw, login, all}

@@ -1,17 +1,3 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-
 function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');    
@@ -28,6 +14,20 @@ function Login(){
   ) 
 }
 
+function firebase(){
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    // Signed in 
+  const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+}
+
 function LoginMsg(props){
   return(<>
     <h5>Success</h5>
@@ -42,6 +42,7 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [user,setUser] = React.useState('');
   const ctx = React.useContext(UserContext);  
 
   function handle(){

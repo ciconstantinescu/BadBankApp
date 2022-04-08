@@ -34,7 +34,7 @@ function BalanceForm(props){
   
   function handle(){
       console.log(email,balance);
-      const url = `/account/balance/${email}/${balance}`;
+      const url = `http://localhost:3000/account/balance/${email}/${balance}`;
       (async () => {
         var res = await fetch(url);
         var data = await res.json();

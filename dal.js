@@ -40,8 +40,8 @@ function login(email, password) {
 }
 
 function deposit (email, amount) {
-    // const newBalance = balance + Number(amount);
-    // console.log(balance);
+    const newBalance = balance + Number(amount);
+    console.log(balance);
   
     const customers = db
         .collection('users')

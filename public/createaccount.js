@@ -30,13 +30,27 @@ function CreateForm(props){
 
   function handle(){
     console.log(name,email,password);
-    const url = `/account/create/${name}/${email}/${password}`;
-    (async () => {
-      var res = await fetch(url);
-      var data = await res.json();
-      console.log(data); 
-    })(); 
-    props.setShow(false);
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log(`User successfuly created: ${user}`);
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(`Error ${errorCode}: ${errorMessage}`);
+      });
+
+    // const url = `/account/create/${name}/${email}/${password}`;
+    // (async () => {
+    //   var res = await fetch(url);
+    //   var data = await res.json();
+    //   console.log(data); 
+    // })(); 
+    // props.setShow(false);
   }    
 
   return (<>

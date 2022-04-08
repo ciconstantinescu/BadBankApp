@@ -18,6 +18,8 @@ function Withdraw(){
 
 function WithdrawMsg(props){
   const [status, setStatus] = React.useState(''); 
+  const [user, setUser] = React.useState('');
+  
   if (!user) {
     props.setStatus('fail!')      
     return;      

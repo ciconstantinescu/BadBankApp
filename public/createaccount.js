@@ -44,13 +44,13 @@ function CreateForm(props){
         console.log(`Error ${errorCode}: ${errorMessage}`);
       });
 
-    // const url = `/account/create/${name}/${email}/${password}`;
-    // (async () => {
-    //   var res = await fetch(url);
-    //   var data = await res.json();
-    //   console.log(data); 
-    // })(); 
-    // props.setShow(false);
+    const url = `/account/create/${name}/${email}/${password}`;
+    (async () => {
+      var res = await fetch(url);
+      var data = await res.json();
+      console.log(data); 
+    })(); 
+    props.setShow(false);
   }    
 
   return (<>

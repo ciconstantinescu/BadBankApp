@@ -39,8 +39,10 @@ function login(email, password) {
     })
 }
 
-function deposit (email, amount) {
-    const newBalance = balance + Number(amount);
+function deposit (name, email, amount) {
+    let balance = user.balance;
+    // const balance = user.balance;
+    const newBalance = user.balance + Number(amount);
     console.log(balance);
   
     const customers = db

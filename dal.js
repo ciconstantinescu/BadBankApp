@@ -39,18 +39,52 @@ function login(email, password) {
     })
 }
 
-function deposit (name, email, amount) {
-    let balance = user.balance;
-    // const balance = user.balance;
-    const newBalance = user.balance + Number(amount);
-    console.log(balance);
-  
-    const customers = db
+async function deposit (name, email, amount) {
+
+    /**
+     * Get the user's record, so you have access to their balance info
+     * This returns the first object that matches the filter (mongo calls these 'docs'), ie:
+     * 
+     *    {
+     *        _id: 4tefw3tg, 
+     *        email: 'me@me.com', 
+     *        name: 'Jay', 
+     *        balance: 0
+     *    }
+     */
+    const user = await db
         .collection('users')
-        .find({email: email}, {balance: amount})
-        .toArray(function(err, docs) {
-            err ? reject(err): resolve(docs);
-        });
+        .findOne({email, name})
+    
+    // Extract the current balance. If for some reason it's undefined, set it to 0.00
+    const currentBalance = user.balance ? parseFloat(user.balance) : 0.00
+    
+    // Set up the filter you'll use to identify which record to update
+    // You don't need to explicitly write { email: email, name: name }, JS does that for you
+    const filter = { email, name }
+
+    // Set what you want to update -- the existing balance plus the amount (converted to a decimal)
+    // You need to set it to a decimal because since it was in a URL string, express is going to think
+    // the amount parameter is a string... and if you try to add '100' and '100' you'll get
+    // '100100' instead of 200
+    const updateDoc = {
+        $set: {
+          balance: currentBalance + parseFloat(amount)
+        },
+      };
+
+    // Wait for the record to be updated
+    await db.collection('users').updateOne(filter, updateDoc);
+
+    // Get the updated record
+    const updatedUser = await db
+        .collection('users')
+        .findOne({email, name})
+    
+    // Send the updated user record back to your deposit route, so that route has
+    // access to the user info
+    return updatedUser
+
 }
 
 function withdraw (email, amount) {

@@ -48,7 +48,8 @@ async function deposit (name, email, amount) {
      *    {
      *        _id: 4tefw3tg, 
      *        email: 'me@me.com', 
-     *        name: 'Jay', balance: 0
+     *        name: 'Jay', 
+     *        balance: 0
      *    }
      */
     const user = await db

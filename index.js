@@ -3,6 +3,10 @@ var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
 
+let newBalance = user.balance + amount; 
+user.balance = newBalance; 
+// alert ('Transaction Successful! Your balance is now $' + newTotal + '!');
+
 app.use(express.static('public'));
 app.use(cors());
 
@@ -22,12 +26,13 @@ app.get('/account/login/:email/:password', function (req, res) {
         });
     })
 
-// app.post('/account/login/:email/:password', (req, res) => {
-//     // Insert Login Code Here
-//     let username = req.body.email;
-//     let password = req.body.password;
-//     res.send(`Username: ${email} Password: ${password}`);
-//     });
+app.get('/account/logout/:email', function (req, res) {
+    dal.logout(req.params.email)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    })
 
 
 app.get('/account/find/:email', function (req, res) {

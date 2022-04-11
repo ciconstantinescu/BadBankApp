@@ -9,10 +9,10 @@ const firebaseConfig = {
 
 try {
     firebase.initializeApp(firebaseConfig);
-    console.log('Firebase initialized');
+    console.log('It works!');
   } catch (err) {
     if (!/already exists/.test(err.message)) {
-      console.error('Firebase initialization error', err.stack);
+      console.error('It does not work', err.stack);
     }
   }
   

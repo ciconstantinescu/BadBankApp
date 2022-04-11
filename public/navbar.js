@@ -23,9 +23,9 @@ function NavBar(){
           <li className="nav-item">
             <a className="nav-link" href="#/balance/">Balance</a>
           </li>
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <a className="nav-link" href="#/logout/">Logout</a>
-          </li> */}
+          </li>
           <li className="nav-item">
             <a className="nav-link" href="#/alldata/">AllData</a>
           </li>          

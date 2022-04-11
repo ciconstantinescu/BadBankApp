@@ -17,7 +17,9 @@ function Login(){
 function LoginMsg(props){
   // const user = user.email;
   window.alert("You are logged in!");
+  window.location.href = "http://cnn.com";
   return(<>
+    <link src="logout.js" defer type="text/babel"></link>
     <h5>{`Welcome!`}</h5>
     <button type="submit" 
       className="btn btn-light" 

@@ -33,7 +33,7 @@ function DepositForm(props){
   const [amount, setAmount] = React.useState('');  
 
   function handle(){
-    console.log(email,amount);
+    console.log(name,email,amount);
     const url = `http://localhost:3000/account/deposit/${name}/${email}/${amount}`;
       (async () => {
         var res = await fetch(url);

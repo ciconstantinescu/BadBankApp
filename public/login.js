@@ -15,9 +15,10 @@ function Login(){
 }
 
 function LoginMsg(props){
-  const [user, setUser] = React.useState('user');
+  // const user = user.email;
+  window.alert("You are logged in!");
   return(<>
-    <h5>{`Welcome {user}!`}</h5>
+    <h5>{`Welcome!`}</h5>
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>
@@ -51,6 +52,8 @@ function LoginForm(props){
       props.setStatus("fail!");
     });  
   }
+
+  // Function to display all accounts 
 
   function handleLogout() {
     firebase

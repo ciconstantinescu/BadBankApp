@@ -1,6 +1,7 @@
 function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
+  const [user, setUser]     = React.useState('');
 
   return (
     <Card
@@ -32,7 +33,6 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [user,setUser]          = React.useState(''); 
 
   function handle(){
     console.log(user);
@@ -43,6 +43,7 @@ function LoginForm(props){
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(`user: ${user.email}`);
+      props.setUser(user);
       props.setStatus("");
       props.setShow(false);
     })

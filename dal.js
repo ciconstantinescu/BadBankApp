@@ -23,6 +23,7 @@ function find(email) {
         const customers = db
             .collection('users')
             .find({ email: email })
+            // change the toArray
             .toArray(function (err, docs) {
                 err ? reject(err) : resolve(docs);
             });
@@ -39,17 +40,40 @@ function login(email, password) {
     })
 }
 
-function deposit (email, amount) {
-    // const newBalance = balance + Number(amount);
-    // console.log(balance);
-  
-    const customers = db
+function deposit (user, balance) {
+    return new Promise ((resolve, reject) => {
+        const customers = db
         .collection('users')
-        .find({email: email}, {balance: amount})
+        .find({email: email})
         .toArray(function(err, docs) {
             err ? reject(err): resolve(docs);
         });
+    })
+  
 }
+
+function depositTwo(user, amount) {
+    const newBalance = user.balance + Number(amount);
+    console.log('newBalance' + newBalance);
+    return new Promise ((resolve, reject) => {
+        try{
+            const customers = db
+            .collection('users')
+            .updateOne(
+                // {name: user.name},
+                {email: user.email}, 
+                {$set: {balance: newBalance}}, 
+                // function(err, docs) {
+                // err ? reject(err): resolve(docs);
+            );
+        resolve(customers)
+        } catch(e) {
+            reject(e)
+        }
+        
+    });
+}
+
 
 function withdraw (email, amount) {
     user.balance = user.balance - Number(amount);
@@ -65,6 +89,21 @@ function withdraw (email, amount) {
         });
 }
 
+function updateOne(name, email, balance) {
+    return new Promise ((resolve, reject) => {
+        const customers = db
+            .collection('users')
+            .updateOne(
+                {name: name},
+                {email: email}, 
+                {balance: amount}, 
+                {returnOriginal: false}, function(err, docs) {
+                err ? reject(err): resolve(docs);
+            });
+    });
+}
+
+
 function findOne (name, email) {
     const customers = db
         .collection('users')
@@ -74,19 +113,6 @@ function findOne (name, email) {
         });
 }
 
-function updateOne(name, email, balance) {
-    return new Promise ((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .findOneAndUpdateOne(
-                {name: name},
-                {email: email}, 
-                {balance: amount}, 
-                {returnOriginal: false}, function(err, docs) {
-                err ? reject(err): resolve(docs);
-            });
-    });
-}
 
 function all() {
     return new Promise((resolve, reject) => {
@@ -99,4 +125,4 @@ function all() {
     })
 }
 
-module.exports = {create, find, findOne, updateOne, deposit, withdraw, login, all}
+module.exports = {create, find, depositTwo, withdraw, login, all}

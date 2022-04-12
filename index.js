@@ -3,10 +3,6 @@ var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
 
-let newBalance = user.balance + amount; 
-user.balance = newBalance; 
-// alert ('Transaction Successful! Your balance is now $' + newTotal + '!');
-
 app.use(express.static('public'));
 app.use(cors());
 
@@ -34,7 +30,6 @@ app.get('/account/logout/:email', function (req, res) {
         });
     })
 
-
 app.get('/account/find/:email', function (req, res) {
     dal.find(req.params.email)
         .then((user) => {
@@ -51,13 +46,26 @@ app.get('/account/findOne/:email', function (req, res) {
         });
     })
 
+// app.get('/account/deposit/:name/:email/:amount', function (req, res) {
+//     dal.deposit(req.params.name, req.params.email, req.params.amount)
+//         .then((user) => {
+//         console.log(user);
+//         res.send(user);
+//         });
+//     }) 
+
 app.get('/account/deposit/:name/:email/:amount', function (req, res) {
-    dal.deposit(req.params.name, req.params.email, req.params.amount)
+    dal.find(req.params.email)
         .then((user) => {
-        console.log(user);
-        res.send(user);
+        console.log('user from index.js' + JSON.stringify(user));
+        dal.depositTwo(user[0], req.params.amount)
+            .then((user) => {
+            console.log(user);
+            res.send(user);
+            });
         });
-    }) 
+  
+        }) 
 
 app.get('/account/withdraw/:email/:amount', function (req, res) {
     dal.withdraw(req.params.email, req.params.amount)

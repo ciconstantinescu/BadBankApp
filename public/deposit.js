@@ -27,7 +27,6 @@ function DepositMsg(props){
 } 
 
 function DepositForm(props){
-  const [user, setUser]     = React.useState('');
   const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');  
@@ -35,11 +34,15 @@ function DepositForm(props){
   function handle(){
     console.log(name,email,amount);
     const url = `http://localhost:3000/account/deposit/${name}/${email}/${amount}`;
-      (async () => {
-        var res = await fetch(url);
-        var data = await res.text();
-        console.log(amount); 
-      })(); 
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log('data' + data);
+        }) 
+        // var res = await fetch(url);
+        // var data = await res.text();
+        // console.log('data' + data); 
+      // })(); 
   }
 
   return(<>

@@ -1,7 +1,8 @@
 function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const [user, setUser] = React.useState('');
+  const [validTransaction, setValidTransaction] = React.useState(false);
+  const accessToken = localStorage.getItem('token');
 
 
   return (
@@ -17,14 +18,6 @@ function Withdraw(){
 }
 
 function WithdrawMsg(props){
-  const [status, setStatus] = React.useState(''); 
-  const [user, setUser] = React.useState('');
-  
-  if (!user) {
-    props.setStatus('fail!')      
-    return;      
-  } 
-
   return(<>
     <h5>Success</h5>
     <button type="submit" 
@@ -37,23 +30,28 @@ function WithdrawMsg(props){
 }
 
 function WithdrawForm(props){
+  const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');  
-  const [user, setUser] = React.useState('');
 
   function handle(){
-    console.log(email,amount);
-    const url = `http://localhost:3000/account/withdraw/${email}/${amount}`;
-      (async () => {
-        var res = await fetch(url);
-        var data = await res.json();
-        console.log(data); 
-      })(); 
-      props.setShow(false);
-  
-  };
+    console.log(name, email,amount);
+    const url = `http://localhost:3000/account/withdraw/${name}/${email}/${amount}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log('data'+ data);
+        })
+  }
 
   return (<>
+
+    Name<br/>
+        <input type="input" 
+          className="form-control" 
+          placeholder="Enter name" 
+          value={name} 
+          onChange={e => setName(e.currentTarget.value)}/><br/>
 
     Email<br/>
     <input type="input" 

@@ -9,39 +9,43 @@ function Login(){
       header="Login"
       status={status}
       body={show ? 
-        <LoginForm setShow={setShow} setStatus={setStatus}/> :
-        <LoginMsg setShow={setShow} setStatus={setStatus}/>}
+        <LoginForm setShow={setShow} setStatus={setStatus} setUser={setUser}/> :
+        <LoginMsg setShow={setShow} setStatus={setStatus} user={user}/>}
     />
   ) 
 }
 
 function LoginMsg(props){
-  // const user = user.email;
+  const currentUser = props.user.email;
   window.alert("You are logged in!");
-  window.location.href = "http://cnn.com";
+  // window.location.href = "http://cnn.com";
   return(<>
-    <link src="logout.js" defer type="text/babel"></link>
-    <h5>{`Welcome!`}</h5>
-    <button type="submit" 
+    {/* <link src="/logout.js" defer type="text/babel"></link> */}
+    <h5>{`Welcome ${currentUser}!`}</h5>
+    {/* <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>
         Authenticate again
-    </button>
+    </button> */}
+    {/* <button type="submit" className="btn btn-light" onClick={handleLogout}>handleLogout</button>  */}
   </>);
 }
+
+
 
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function handle(){
-    console.log(user);
+    // console.log(user);
     console.log(email, password);
     firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      // const currentUser = user.email;
       console.log(`user: ${user.email}`);
       props.setUser(user);
       props.setStatus("");
@@ -51,7 +55,7 @@ function LoginForm(props){
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("one");
-      console.log(`Error logging in ${errorCode}: ${errorMessage}`);
+      // console.log(`Error logging in ${errorCode}: ${errorMessage}`);
       props.setStatus("fail!");
     });  
   }

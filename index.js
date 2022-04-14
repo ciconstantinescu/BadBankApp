@@ -58,30 +58,33 @@ app.get('/account/deposit/:name/:email/:amount', function (req, res) {
     dal.find(req.params.email)
         .then((user) => {
         console.log('user from index.js' + JSON.stringify(user));
-        dal.depositTwo(user[0], req.params.amount)
+        dal.deposit(user[0], req.params.amount)
             .then((user) => {
             console.log(user);
             res.send(user);
             });
         });
-  
-        }) 
+}) 
 
-app.get('/account/withdraw/:email/:amount', function (req, res) {
-    dal.withdraw(req.params.email, req.params.amount)
+app.get('/account/withdraw/:name/:email/:amount', function (req, res) {
+    dal.find(req.params.email)
         .then((user) => {
-        console.log(user);
-        res.send(user);
+        console.log('user from index.js' + JSON.stringify(user));
+        dal.withdraw(user[0], req.params.amount)
+            .then((user) => {
+            console.log(user);
+            res.send(user);
         });
-    })    
+    });
+})    
 
-app.get('/account/balance/:email/:amount', function (req, res) {
-    dal.deposit(req.params.email, req.params.amount)
-        .then((user) => {
-        console.log(user);
-        res.send(user);
-        });
-    })  
+// app.get('/account/balance/:email/:amount', function (req, res) {
+//     dal.deposit(req.params.email, req.params.amount)
+//         .then((user) => {
+//         console.log(user);
+//         res.send(user);
+//         });
+//     })  
 
 app.get('/account/updateBalance/:email', function (req, res) {
     dal.update(req.params.email)

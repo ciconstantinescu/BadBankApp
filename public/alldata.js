@@ -1,7 +1,13 @@
 function AllData(){
   const [data, setData] = React.useState('');
   const [user, setUser] = React.useState('');
-  const [date, setDate] = React.useState('');
+  
+  const date = new Date(Date.now());
+  const mm = date.getMonth() + 1; 
+    const dd = date.getDate();
+    const year = date.getFullYear();
+
+    const dateString = `${mm}/${dd}/${year}`;
 
     function handleLogout() {
       firebase
@@ -26,9 +32,7 @@ function AllData(){
   
   return (
     <>
-    {/* <h5>{data}</h5> */}
-    {/* <h6>{d}</h6> */}
-        <p><b>Your Account Overview as of {date}</b></p>
+        <p><b>Your Account Overview as of {dateString}</b></p>
             <br></br><br></br>
         <div>
         <Card

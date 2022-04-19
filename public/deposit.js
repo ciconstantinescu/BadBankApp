@@ -3,18 +3,6 @@ function Deposit(){
   const [status, setStatus] = React.useState('');  
   const accessToken = localStorage.getItem('token');
 
-  // const ATMDeposit = ({ onChange, isDeposit, isValid }) => { 
-  //   const choice = ['Deposit'];
-  //   console.log(`ATM isDeposit: ${isDeposit}`);
-  //   return (
-  //     <label className="label huge">
-  //       <h3> {choice[Number(!isDeposit)]}</h3>
-  //       <input id="number-input" type="text" width="200" onChange={onChange}></input>
-  //       <input type="submit" disabled={!isValid} width="200" value="Submit" id="submit-input"></input>
-  //     </label>
-  //   );
-  // };
-
   return (
     <Card
       bgcolor="warning"
@@ -42,7 +30,6 @@ function DepositForm(props){
   const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');  
-  const [mode, setMode]     = React.useState('');
 
   function handle(){
     console.log(name,email,amount);
@@ -53,16 +40,6 @@ function DepositForm(props){
           console.log('data' + data);
         }) 
   }
-
-  const handleModeSelect = (event) => {
-    setMode(event.target.value);
-    setValidTransaction(false);
-    if (event.target.value === 'Deposit') {
-      setIsDeposit(true);
-    } else {
-      setIsDeposit(false);
-    }
-  };
 
   return(<>
 
@@ -77,13 +54,7 @@ function DepositForm(props){
       className="form-control" 
       placeholder="Enter email" 
       value={email} onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-    <select onChange={(e) => handleModeSelect(e)} name="mode" id="mode-select">
-          <option id="no-selection" value="">Select</option>
-          <option id="deposit-selection" value="Deposit">Deposit</option>
-          <option id="deposit-selection" value="Deposit">withdraw</option>
-    </select>
-     
+      
     Amount<br/>
     <input type="number" 
       className="form-control" 

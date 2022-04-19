@@ -2,6 +2,10 @@ function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
   const [user, setUser]     = React.useState('');
+  const useHistory          = ReactRouterDOM.useHistory;
+
+  // let history = useHistory();
+  // history.push('/logout')
 
   return (
     <Card
@@ -20,7 +24,6 @@ function LoginMsg(props){
   window.alert("You are logged in!");
   // window.location.href = "http://cnn.com";
   return(<>
-    {/* <link src="/logout.js" defer type="text/babel"></link> */}
     <h5>{`Welcome ${currentUser}!`}</h5>
     {/* <button type="submit" 
       className="btn btn-light" 
@@ -31,11 +34,10 @@ function LoginMsg(props){
   </>);
 }
 
-
-
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const useHistory          = ReactRouterDOM.useHistory;
 
   function handle(){
     // console.log(user);
@@ -58,21 +60,70 @@ function LoginForm(props){
       // console.log(`Error logging in ${errorCode}: ${errorMessage}`);
       props.setStatus("fail!");
     });  
+    async function handleSubmit(event) {
+      event.preventDefault();
+    
+      try {
+        await Auth.signIn(email, password);
+        userHasAuthenticated(true);
+        history.push("/logout");
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    
+    // let history = useHistory();
+    // history.push('/logout')
   }
 
-  // Function to display all accounts 
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+  
+  //   try {
+  //     await Auth.signIn(email, password);
+  //     userHasAuthenticated(true);
+  //     history.push("/logout");
+  //   } catch (e) {
+  //     alert(e.message);
+  //   }
+  // }
 
-  function handleLogout() {
+  function handleGoogle(){
+    // console.log(user);
+    // console.log(email, password);
+    var provider = new firebase.auth.GoogleAuthProvider();
+    
     firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log("User successfuly logs out");
-      })
-      .catch((error) => {
-        console.log(`Error logging out ${errorCode}: ${errorMessage}`);
-      });
+    .auth()
+    .signInWithPopup(provider)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      // const currentUser = user.email;
+      // console.log(`user: ${user.email}`);
+      props.setUser(user);
+      props.setStatus("");
+      props.setShow(false);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("one");
+      // console.log(`Error logging in ${errorCode}: ${errorMessage}`);
+      props.setStatus("fail!");
+    });  
   }
+
+  // function handleLogout() {
+  //   firebase
+  //     .auth()
+  //     .signOut()
+  //     .then(() => {
+  //       console.log("User successfuly logs out");
+  //     })
+  //     .catch((error) => {
+  //       console.log(`Error logging out ${errorCode}: ${errorMessage}`);
+  //     });
+  // }
 
 
   return (<>
@@ -91,8 +142,8 @@ function LoginForm(props){
       value={password} 
       onChange={e => setPassword(e.currentTarget.value)}/><br/>
 
-    <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
-    {/* <button type="submit" className="btn btn-light" onClick={handleLogout}>handleLogout</button> */}
+    <button type="submit" className="btn btn-light" onClick={handle}>Login</button><br></br><br></br>
+    <button type="submit" className="btn btn-light" onClick={handleGoogle}>Google Login</button>
   </>);
 
 }

@@ -1,3 +1,5 @@
+const Switch = ReactRouterDOM.Switch;
+
 function Spa() {
   return (
     <HashRouter>
@@ -11,7 +13,7 @@ function Spa() {
             <Route path="/deposit/" component={Deposit} />
             <Route path="/withdraw/" component={Withdraw} />
             <Route path="/logout/" component={Logout} />
-            {/* <Route path="/balance/" component={Balance}/> */}
+            <Route path="/balance/" component={Balance}/>
             <Route path="/alldata/" component={AllData} />
           </div>
         </UserContext.Provider>

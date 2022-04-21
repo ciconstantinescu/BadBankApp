@@ -1,10 +1,8 @@
-// const useHistory          = ReactRouterDOM.useHistory;
-
 function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
   const [user, setUser]     = React.useState('');
-  const useHistory          = ReactRouterDOM.useHistory;
+  const UserContext = React.createContext(null);
 
   return (
     <Card
@@ -21,6 +19,7 @@ function Login(){
 function LoginMsg(props){
   const currentUser = props.user.email;
   window.alert("You are logged in!");
+  // window.location.replace('/#/logout');
   return(<>
     <h5>{`Welcome ${currentUser}!`}</h5>
   </>);
@@ -29,7 +28,6 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-  const useHistory          = ReactRouterDOM.useHistory;
 
   function handle(){
     console.log(email, password);
@@ -42,23 +40,17 @@ function LoginForm(props){
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
+      window.location.replace('/#/alldata');
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("one");
-      // console.log(`Error logging in ${errorCode}: ${errorMessage}`);
       props.setStatus("fail!");
     });  
-
-     let history = useHistory();
-    history.push('/logout')
-   
   }
 
   function handleGoogle(){
-    // console.log(user);
-    // console.log(email, password);
     var provider = new firebase.auth.GoogleAuthProvider();
     
     firebase
@@ -66,8 +58,6 @@ function LoginForm(props){
     .signInWithPopup(provider)
     .then((userCredential) => {
       const user = userCredential.user;
-      // const currentUser = user.email;
-      // console.log(`user: ${user.email}`);
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
@@ -76,7 +66,6 @@ function LoginForm(props){
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("one");
-      // console.log(`Error logging in ${errorCode}: ${errorMessage}`);
       props.setStatus("fail!");
     });  
   }
@@ -112,6 +101,10 @@ function LoginForm(props){
 
     <button type="submit" className="btn btn-light" onClick={handle}>Login</button><br></br><br></br>
     <button type="submit" className="btn btn-light" onClick={handleGoogle}>Google Login</button>
+
+    <p className="forgot-password text-right"><br></br><br></br>
+        New to BadBank? <a href="#/CreateAccount/">JOIN</a> today!
+    </p>
   </>);
 
 }

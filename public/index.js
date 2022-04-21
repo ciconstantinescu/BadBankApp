@@ -1,6 +1,5 @@
-const useHistory          = ReactRouterDOM.useHistory;
-
 function Spa() {
+  const ctx = React.useContext(UserContext);
 
   return (
     <HashRouter>

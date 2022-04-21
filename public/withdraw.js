@@ -2,10 +2,23 @@ function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
   const [validTransaction, setValidTransaction] = React.useState(false);
-  const accessToken = localStorage.getItem('token');
+  // const accessToken = localStorage.getItem('token');
+  const [user, setUser] = React.useState('');
+  const ctx = React.useContext(UserContext);
 
+  const date = new Date(Date.now());
+  const mm = date.getMonth() + 1; 
+    const dd = date.getDate();
+    const year = date.getFullYear();
+
+    const dateString = `${mm}/${dd}/${year}`;
 
   return (
+    <>
+    <div>
+      <h5>{dateString}: Your current account balance is {user.balance}</h5>
+      </div>
+    <br></br><br></br>
     <Card
       bgcolor="success"
       header="Withdraw"
@@ -14,6 +27,7 @@ function Withdraw(){
         <WithdrawForm setShow={setShow} setStatus={setStatus}/> :
         <WithdrawMsg setShow={setShow}/>}
     />
+    </>
   )
 }
 

@@ -1,9 +1,30 @@
 function Deposit(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const accessToken = localStorage.getItem('token');
+  // const accessToken = localStorage.getItem('token');
+  const [user, setUser] = React.useState('');
+  const ctx = React.useContext(UserContext);
+  const [balance, setBalance] = React.useState('');
+
+  // const user = ctx.users.find(user => user.email ==='carmen@mit.edu');
+ 
+  const date = new Date(Date.now());
+  const mm = date.getMonth() + 1; 
+  const dd = date.getDate();
+  const year = date.getFullYear();
+  const dateString = `${mm}/${dd}/${year}`;
+
+  // const balance = user.balance;
+  let currentBalance = `Current Account Balance: $ ${user.balance} `;
+
+
 
   return (
+    <>
+      <div>
+      <h5>{dateString}: Your current account balance is {currentBalance}</h5>
+      </div>
+    <br></br><br></br>
     <Card
       bgcolor="warning"
       header="Deposit"
@@ -12,6 +33,7 @@ function Deposit(){
         <DepositForm setShow={setShow} setStatus={setStatus}/> :
         <DepositMsg setShow={setShow}/>}
     />
+    </>
   )
 }
 
@@ -42,7 +64,6 @@ function DepositForm(props){
   }
 
   return(<>
-
     Name<br/>
         <input type="input" 
           className="form-control" 
@@ -64,6 +85,5 @@ function DepositForm(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={handle}>Deposit</button>
-
   </>);
 }

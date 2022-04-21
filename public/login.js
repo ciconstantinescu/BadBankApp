@@ -29,6 +29,7 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const ctx = React.useContext(UserContext);
 
   function handle(){
     console.log(email, password);
@@ -51,6 +52,7 @@ function LoginForm(props){
     });  
   }
 
+  
   function handleGoogle(){
     var provider = new firebase.auth.GoogleAuthProvider();
     
@@ -70,19 +72,6 @@ function LoginForm(props){
       props.setStatus("fail!");
     });  
   }
-
-  // function handleLogout() {
-  //   firebase
-  //     .auth()
-  //     .signOut()
-  //     .then(() => {
-  //       console.log("User successfuly logs out");
-  //     })
-  //     .catch((error) => {
-  //       console.log(`Error logging out ${errorCode}: ${errorMessage}`);
-  //     });
-  // }
-
 
   return (<>
 

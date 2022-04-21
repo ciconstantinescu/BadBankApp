@@ -1,10 +1,14 @@
 function Withdraw(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const [validTransaction, setValidTransaction] = React.useState(false);
-  // const accessToken = localStorage.getItem('token');
+  // const [validTransaction, setValidTransaction] = React.useState(false);
   const [user, setUser] = React.useState('');
   const ctx = React.useContext(UserContext);
+  const [balance, setBalance] = React.useState(ctx.user.balance);
+
+  const handleSetBalance = (amount) => {
+    setBalance(amount)
+  }
 
   const date = new Date(Date.now());
   const mm = date.getMonth() + 1; 
@@ -16,7 +20,7 @@ function Withdraw(){
   return (
     <>
     <div>
-      <h5>{dateString}: Your current account balance is {user.balance}</h5>
+      <h5>{dateString}: Your current account balance is {balance}</h5>
       </div>
     <br></br><br></br>
     <Card
@@ -46,7 +50,8 @@ function WithdrawMsg(props){
 function WithdrawForm(props){
   const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
-  const [amount, setAmount] = React.useState('');  
+  const [amount, setAmount] = React.useState(''); 
+  const ctx = React.useContext(UserContext); 
 
   function handle(){
     console.log(name, email,amount);
@@ -55,6 +60,8 @@ function WithdrawForm(props){
         .then(response => response.json())
         .then(data => {
           console.log('data'+ data);
+          props.setBalance(ctx.user.balance - amount);
+          ctx.user.balance -= amount;
         })
   }
 

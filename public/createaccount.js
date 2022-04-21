@@ -2,7 +2,6 @@ function CreateAccount(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');
   const [accountID, setAccountID] = React.useState(null);
-  const ctx = React.useContext(UserContext);
   
   function generateAccountID() {
     const accountID = function () {
@@ -41,7 +40,8 @@ function CreateForm(props){
   const [name, setName]         = React.useState('');
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');  
-  
+  const ctx = React.useContext(UserContext);
+
   function handle(){
     console.log(email,password);
     // ctx.users.push({firstName,lastName,email,password,balance:0});
@@ -65,6 +65,7 @@ function CreateForm(props){
       var data = await res.json();
       console.log(data); 
     })(); 
+    ctx.setUser({ name: name, email: email });
     props.setShow(false);
   }    
 

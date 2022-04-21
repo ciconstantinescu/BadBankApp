@@ -10,7 +10,7 @@ const dateString = `${mm}/${dd}/${year}`;
 function Logout() {
 
   function LogoutMsg(props){
-    const useHistory          = ReactRouterDOM.useHistory;
+    // const useHistory          = ReactRouterDOM.useHistory;
     const currentUser = props.user.email;
     window.alert("You are logged out!");
     // window.location.replace("/#/");

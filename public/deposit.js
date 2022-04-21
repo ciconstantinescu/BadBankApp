@@ -1,12 +1,9 @@
 function Deposit(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  // const accessToken = localStorage.getItem('token');
   const [user, setUser] = React.useState('');
   const ctx = React.useContext(UserContext);
   const [balance, setBalance] = React.useState('');
-
-  // const user = ctx.users.find(user => user.email ==='carmen@mit.edu');
  
   const date = new Date(Date.now());
   const mm = date.getMonth() + 1; 
@@ -14,15 +11,12 @@ function Deposit(){
   const year = date.getFullYear();
   const dateString = `${mm}/${dd}/${year}`;
 
-  // const balance = user.balance;
   let currentBalance = `Current Account Balance: $ ${user.balance} `;
-
-
 
   return (
     <>
       <div>
-      <h5>{dateString}: Your current account balance is {currentBalance}</h5>
+      <h5>{dateString}: Your current account balance is {ctx.user.balance}</h5>
       </div>
     <br></br><br></br>
     <Card
@@ -51,7 +45,8 @@ function DepositMsg(props){
 function DepositForm(props){
   const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
-  const [amount, setAmount] = React.useState('');  
+  const [amount, setAmount] = React.useState('');
+  const ctx = React.useContext(UserContext);  
 
   function handle(){
     console.log(name,email,amount);
@@ -59,6 +54,7 @@ function DepositForm(props){
       fetch(url)
         .then(response => response.json())
         .then(data => {
+          ctx.user.balance += amount;
           console.log('data' + data);
         }) 
   }

@@ -3,6 +3,7 @@ function Login(){
   const [status, setStatus] = React.useState('');   
   const [user, setUser]     = React.useState('');
   const UserContext = React.createContext(null);
+  const ctx = React.useContext(UserContext);
 
   return (
     <Card

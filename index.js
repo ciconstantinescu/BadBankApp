@@ -46,13 +46,6 @@ app.get('/account/findOne/:email', function (req, res) {
         });
     })
 
-// app.get('/account/deposit/:name/:email/:amount', function (req, res) {
-//     dal.deposit(req.params.name, req.params.email, req.params.amount)
-//         .then((user) => {
-//         console.log(user);
-//         res.send(user);
-//         });
-//     }) 
 
 app.get('/account/deposit/:name/:email/:amount', function (req, res) {
     dal.find(req.params.email)

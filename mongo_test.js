@@ -4,7 +4,7 @@ const url = 'mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankC
 MongoClient.connect("mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority/", function(err, client) {
     console.log('Connected!');
     
-    const dbName = 'badbank';
+    const dbName = 'MyBadBankCapstone';
     const db = client.db(dbName);
 
     var name = 'user' + Math.floor(Math.random()*10000);

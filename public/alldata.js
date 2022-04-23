@@ -7,7 +7,6 @@ function AllData() {
   const [email, setEmail] = React.useState('');
   const ctx = React.useContext(UserContext);
   const { user } = ctx; 
-  const [name, setName] = React.useState(user.name);
 
   React.useEffect(() => {
     console.log(user);
@@ -17,7 +16,7 @@ function AllData() {
               
               console.log(data);
               ctx.user = data[0];
-              setName(user.name);
+              // setName(user.name);
               setBalance(data[0].balance);
               setData(JSON.stringify(data));
           });

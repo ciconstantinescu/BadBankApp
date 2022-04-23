@@ -3,7 +3,7 @@ function Deposit(){
   const [status, setStatus] = React.useState('');  
   const [user, setUser] = React.useState('');
   const ctx = React.useContext(UserContext);
-  const [balance, setBalance] = React.useState('');
+  const [balance, setBalance] = React.useState(ctx.user.balance);
  
   const date = new Date(Date.now());
   const mm = date.getMonth() + 1; 

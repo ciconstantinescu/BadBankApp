@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 
-MongoClient.connect("mongodb://localhost:27017/", function(err, client) {
+MongoClient.connect("mongodb://mongodb+srv://carmen:<lolo33>@badbankapp.w9xv5.mongodb.net/BadBankApp?retryWrites=true&w=majority/", function(err, client) {
     console.log('Connected!');
     
     const dbName = 'badbank';

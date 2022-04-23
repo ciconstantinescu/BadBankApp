@@ -38,6 +38,7 @@ function LoginForm(props){
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      ctx.user={ name: null, email: email, balance: null};
       console.log(`user: ${user.email}`);
       props.setUser(user);
       props.setStatus("");
@@ -51,7 +52,6 @@ function LoginForm(props){
       props.setStatus("fail!");
     });  
   }
-
   
   function handleGoogle(){
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -61,9 +61,11 @@ function LoginForm(props){
     .signInWithPopup(provider)
     .then((userCredential) => {
       const user = userCredential.user;
+      // ctx.user={ name: null, email: email, balance: null};
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
+      window.location.replace('/#/alldata');
     })
     .catch((error) => {
       const errorCode = error.code;

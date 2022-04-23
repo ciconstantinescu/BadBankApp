@@ -51,7 +51,7 @@ function CreateForm(props){
       .then((userCredential) => {
         var user = userCredential.user;
         console.log(`User successfuly created: ${user}`);
-        // window.location.replace('/#/deposit');
+        window.location.replace('/#/alldata');
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -65,8 +65,8 @@ function CreateForm(props){
       var data = await res.json();
       console.log(data); 
     })(); 
-    ctx.setUser({ name: name, email: email });
-    props.setShow(false);
+      ctx.setUser({ name: name, email: email });
+      props.setShow(false);
   }    
 
   return (<>

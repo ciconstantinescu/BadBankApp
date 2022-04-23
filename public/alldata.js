@@ -7,26 +7,21 @@ function AllData() {
   const [email, setEmail] = React.useState('');
   const ctx = React.useContext(UserContext);
   const { user } = ctx; 
+  const [name, setName] = React.useState(user.name);
 
   React.useEffect(() => {
+    console.log(user);
         fetch('/account/find/' + user.email)
           .then(response => response.json())
           .then(data => {
               
               console.log(data);
               ctx.user = data[0];
+              setName(user.name);
               setBalance(data[0].balance);
               setData(JSON.stringify(data));
           });
       }, []);
-
-  function LogoutMsg(props){
-    const currentUser = props.user.email;
-    window.alert("You are logged out!");
-    return(<>
-      <h5>{`Hello ${currentUser}! Below is account summary as of ${dateString}:`}</h5>
-    </>);
-  }
 
   function handleLogout() {
     firebase
@@ -45,9 +40,11 @@ function AllData() {
 
   return (
     <>
+    <div style={{textAlign: "right"}}>
     <p>
-      As of {dateString} your balance is {ctx.user.balance}!
+      Hello {user.name}! As of {dateString} your balance is {ctx.user.balance}!
     </p>
+    </div>
     <div>
       <Card
           txtcolor="primary"

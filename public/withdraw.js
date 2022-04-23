@@ -1,9 +1,7 @@
 function Withdraw(){
+  const ctx = React.useContext(UserContext);
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  // const [validTransaction, setValidTransaction] = React.useState(false);
-  const [user, setUser] = React.useState('');
-  const ctx = React.useContext(UserContext);
   const [balance, setBalance] = React.useState(ctx.user.balance);
 
   const handleSetBalance = (amount) => {
@@ -28,7 +26,7 @@ function Withdraw(){
       header="Withdraw"
       status={status}
       body={show ? 
-        <WithdrawForm setShow={setShow} setStatus={setStatus}/> :
+        <WithdrawForm setBalance={handleSetBalance} setShow={setShow} setStatus={setStatus}/> :
         <WithdrawMsg setShow={setShow}/>}
     />
     </>
@@ -54,7 +52,7 @@ function WithdrawForm(props){
   const ctx = React.useContext(UserContext); 
 
   function handle(){
-    console.log(name, email,amount);
+    console.log(name, email, amount);
     const url = `http://localhost:3000/account/withdraw/${name}/${email}/${amount}`;
       fetch(url)
         .then(response => response.json())

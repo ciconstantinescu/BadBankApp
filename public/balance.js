@@ -2,7 +2,7 @@ function Balance(props){
   const [user, setUser]     = React.useState('');
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const [balance, setBalance] = React.useState('')
+  const [balance, setBalance] = React.useState(ctx.user.balance);
 
   return (
     <Card
@@ -58,6 +58,7 @@ function BalanceForm(props){
   const [email, setEmail]   = React.useState('');
   const [balance, setBalance] = React.useState('');  
   const [user, setUser] = React.useState('');
+  const ctx = React.useContext(UserContext);  
   
   // function handle(){
   //     console.log(email,balance);

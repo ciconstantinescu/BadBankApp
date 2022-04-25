@@ -10,7 +10,7 @@ function AllData() {
 
   React.useEffect(() => {
     console.log(user);
-        fetch('/account/find/' + user.email)
+        fetch(`/account/find` + user.email)
           .then(response => response.json())
           .then(data => {
               

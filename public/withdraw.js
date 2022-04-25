@@ -52,14 +52,16 @@ function WithdrawForm(props){
   const ctx = React.useContext(UserContext); 
 
   function handle(){
+    alert ('Transaction Successful! You withdrew $' + amount + '!');
     console.log(name, email, amount);
-    const url = `http://localhost:3000/account/withdraw/${name}/${email}/${amount}`;
+    const url = `/account/withdraw/${name}/${email}/${amount}`;
       fetch(url)
         .then(response => response.json())
         .then(data => {
           console.log('data'+ data);
           props.setBalance(ctx.user.balance - amount);
           ctx.user.balance -= amount;
+          window.location.replace('/#/alldata');
         })
   }
 

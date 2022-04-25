@@ -41,14 +41,28 @@ function AllData() {
     <>
     <div style={{textAlign: "right"}}>
     <p>
-      Hello {user.name}! As of {dateString} your balance is {ctx.user.balance}!
+      Hello <strong>{user.name}</strong>! As of {dateString} your balance is {ctx.user.balance}!
     </p>
     </div>
     <div>
+    <table style={{textAlign: "right"}}>
+      <td><a href="/#/deposit"><button>Deposit</button></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      <td><a href="/#/withdraw"><button>Withdraw</button></a></td>
+    </table>
+    </div>
+    <div>
+      
+      {/* <button type="submit" className="btn btn-light">Deposit</button><br></br><button type="submit" className="btn btn-light">Withdraw</button> */}
+    </div><br></br><br></br><br></br><br></br>
+    <div>
       <Card
           txtcolor="primary"
-          header="Checking Account"
-          text="Transaction History"
+          header="Transaction History"
+          text="Click on transaction below for more details:"
           />
         </div>
         <div className="dropdown">

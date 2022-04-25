@@ -16,13 +16,13 @@ function CreateAccount(){
       status={status}
       body={show ? 
         <CreateForm setShow={setShow}/> : 
-        <CreateMsg setShow={setShow}/>}
+        <CreateMsg setShow={setShow} setAccountID={setAccountID}/>}
     />
   )
 }
 
-function direct () {
-  window.location.replace("/#/alldata")
+function redirect () {
+  window.location.replace("/#/login")
 }
 
 function CreateMsg(props){
@@ -32,7 +32,7 @@ function CreateMsg(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>Add another account</button><br></br><br></br>
-     <button type="submit" className="btn btn-light" onClick={direct}>Go to Account Summary</button>
+     <button type="submit" className="btn btn-light" style={{backgroundColor: 'green'}} onClick={redirect}>Click to Login</button>
   </>);
 }
 
@@ -51,7 +51,7 @@ function CreateForm(props){
       .then((userCredential) => {
         var user = userCredential.user;
         console.log(`User successfuly created: ${user}`);
-        window.location.replace('/#/alldata');
+        // window.location.replace('/#/alldata');
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -65,7 +65,7 @@ function CreateForm(props){
       var data = await res.json();
       console.log(data); 
     })(); 
-      ctx.setUser({ name: name, email: email });
+      // ctx.user({ name: name, email: email });
       props.setShow(false);
   }    
 

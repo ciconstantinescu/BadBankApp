@@ -14,6 +14,8 @@ function Spa() {
             <Route path="/logout/" component={Logout} />
             <Route path="/balance/" component={Balance}/>
             <Route path="/alldata/" component={AllData} />
+            <Route path="/alldatanotlogged/" component={AllDataNotLogged} />
+            <Route path="/navbarloggedin/" component={NavBarLoggedIn}/>
           </div>
         </UserContext.Provider>
       </div>

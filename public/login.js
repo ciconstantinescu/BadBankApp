@@ -29,6 +29,7 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [userLoggedIn, setUserLoggedIn] = React.useState(false);
   const ctx = React.useContext(UserContext);
 
   function handle(){
@@ -43,7 +44,7 @@ function LoginForm(props){
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
-      window.location.replace('/#/alldata');
+      window.location.replace('/#/navbarloggedin');
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -65,7 +66,11 @@ function LoginForm(props){
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
-      window.location.replace('/#/alldata');
+      // if (!userLoggedIn) {
+      //     window.location.replace('/#/navbarloggedin');
+      // } else {
+      //   return;
+      // }
     })
     .catch((error) => {
       const errorCode = error.code;

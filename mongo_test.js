@@ -5,7 +5,7 @@ MongoClient.connect("mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/My
     console.log('Connected!');
     
     const dbName = 'MyBadBankCapstone';
-    const db = client.db(dbName);
+    // const db = client.db(dbName);
 
     var name = 'user' + Math.floor(Math.random()*10000);
     var email = name + '@mit.edu';

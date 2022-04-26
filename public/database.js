@@ -1,5 +1,3 @@
-// import firebase from 'firebase';
-
 const firebaseConfig = {
     apiKey: "AIzaSyCSXRKF4mmypNtQa3H8RAsc55067lvhvwE",
     authDomain: "capstone-ae2f7.firebaseapp.com",
@@ -11,12 +9,11 @@ const firebaseConfig = {
 
 try {
     firebase.initializeApp(firebaseConfig);
+    console.log('It works!');
   } catch (err) {
     if (!/already exists/.test(err.message)) {
-      console.error('Firebase initialization error', err.stack);
+      console.error('It does not work', err.stack);
     }
   }
   
-  const fire = firebase;
-
-  // export default fire;
+  // const fire = firebase;

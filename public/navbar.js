@@ -14,17 +14,17 @@ function NavBar(){
           <li className="nav-item">
             <a className="nav-link" href="#/login/">Login</a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="#/deposit/">Deposit</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#/withdraw/">Withdraw</a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="#/balance/">Balance</a>
-          </li>
+          </li> */}
           <li className="nav-item">
-            <a className="nav-link" href="#/alldata/">AllData</a>
+            <a className="nav-link" href="#/alldatanotlogged">My Account</a>
           </li>          
         </ul>
       </div>

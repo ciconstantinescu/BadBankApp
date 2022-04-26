@@ -1,7 +1,9 @@
 function CreateAccount(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');
+  const [user, setUser]  = React.useState('');
   const [accountID, setAccountID] = React.useState(null);
+  const ctx = React.useContext(UserContext);
   
   function generateAccountID() {
     const accountID = function () {
@@ -26,9 +28,11 @@ function direct () {
 }
 
 function CreateMsg(props){
+  const [newUser, setNewUser] = React.useState('');
+
   const accountID = Math.random().toString().slice(2,11);
   return(<>
-    <h5>Success! Your account number is {accountID}</h5>
+    <h5>Success {newUser.email}! Your account number is {accountID}</h5>
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>Add another account</button><br></br><br></br>
@@ -66,7 +70,7 @@ function CreateForm(props){
       console.log(data); 
     })(); 
     // Save the user in context
-    ctx.setUser({ name: name, email: email });
+    ctx.user = { name: name, email: email };
     props.setShow(false);
   }    
 

@@ -106,13 +106,13 @@ app.get('/account/withdraw/:name/:email/:amount', function (req, res) {
     });
 })    
 
-// app.get('/account/balance/:email/:amount', function (req, res) {
-//     dal.deposit(req.params.email, req.params.amount)
-//         .then((user) => {
-//         console.log(user);
-//         res.send(user);
-//         });
-//     })  
+app.get('/account/balance/:email/:amount', function (req, res) {
+    dal.deposit(req.params.email, req.params.amount)
+        .then((user) => {
+        console.log(user);
+        res.send(user);
+        });
+    })  
 
 app.get('/account/updateBalance/:email', function (req, res) {
     dal.update(req.params.email)

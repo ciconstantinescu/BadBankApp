@@ -29,7 +29,7 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-  // const ctx = React.useContext(UserContext);
+  const ctx = React.useContext(UserContext);
 
   function handle(){
     console.log(email, password);

@@ -85,25 +85,6 @@ function withdraw (user, amount) {
     });
 }
 
-function withdraw (user, amount) {
-    const newTotal = user.balance - Number(amount);
-    // user.balance = newTotal;
-    console.log('newTotal' + newTotal);
-    return new Promise ((resolve, reject) => {
-        try{
-            const customers = db
-            .collection('users')
-            .updateOne(
-                {name: name},
-                {email: email}, 
-                {balance: amount}, 
-                {returnOriginal: false}, function(err, docs) {
-                err ? reject(err): resolve(docs);
-            });
-    });
-}
-
-
 function findOne (name, email) {
     const customers = db
         .collection('users')

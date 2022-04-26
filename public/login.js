@@ -29,12 +29,7 @@ function LoginMsg(props){
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-<<<<<<< HEAD
   // const ctx = React.useContext(UserContext);
-=======
-  const [userLoggedIn, setUserLoggedIn] = React.useState(false);
-  const ctx = React.useContext(UserContext);
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
 
   function handle(){
     console.log(email, password);
@@ -43,19 +38,11 @@ function LoginForm(props){
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-<<<<<<< HEAD
-=======
-      ctx.user={ name: null, email: email, balance: null};
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
       console.log(`user: ${user.email}`);
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
-<<<<<<< HEAD
       window.location.replace('/#/alldata');
-=======
-      window.location.replace('/#/navbarloggedin');
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -64,10 +51,6 @@ function LoginForm(props){
       props.setStatus("fail!");
     });  
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
   
   function handleGoogle(){
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -77,21 +60,9 @@ function LoginForm(props){
     .signInWithPopup(provider)
     .then((userCredential) => {
       const user = userCredential.user;
-<<<<<<< HEAD
       props.setUser(user);
       props.setStatus("");
       props.setShow(false);
-=======
-      // ctx.user={ name: null, email: email, balance: null};
-      props.setUser(user);
-      props.setStatus("");
-      props.setShow(false);
-      // if (!userLoggedIn) {
-      //     window.location.replace('/#/navbarloggedin');
-      // } else {
-      //   return;
-      // }
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
     })
     .catch((error) => {
       const errorCode = error.code;

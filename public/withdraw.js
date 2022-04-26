@@ -2,11 +2,8 @@ function Withdraw(){
   const ctx = React.useContext(UserContext);
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-<<<<<<< HEAD
   const [validTransaction, setValidTransaction] = React.useState(false);
   // const accessToken = localStorage.getItem('token');
-=======
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
   const [balance, setBalance] = React.useState(ctx.user.balance);
 
   const handleSetBalance = (amount) => {
@@ -53,7 +50,6 @@ function WithdrawMsg(props){
 function WithdrawForm(props){
   const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
-<<<<<<< HEAD
   const [amount, setAmount] = React.useState('');  
   const ctx = React.useContext(UserContext);
 
@@ -66,22 +62,6 @@ function WithdrawForm(props){
           console.log('data', data);
           props.setBalance(ctx.user.balance - amount);
           ctx.user.balance -= amount;
-=======
-  const [amount, setAmount] = React.useState(''); 
-  const ctx = React.useContext(UserContext); 
-
-  function handle(){
-    alert ('Transaction Successful! You withdrew $' + amount + '!');
-    console.log(name, email, amount);
-    const url = `/account/withdraw/${name}/${email}/${amount}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          console.log('data'+ data);
-          props.setBalance(ctx.user.balance - amount);
-          ctx.user.balance -= amount;
-          window.location.replace('/#/alldata');
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
         })
   }
 

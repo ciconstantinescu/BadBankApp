@@ -21,13 +21,8 @@ function CreateAccount(){
   )
 }
 
-<<<<<<< HEAD
 function direct () {
   window.location.replace("/#/alldata")
-=======
-function redirect () {
-  window.location.replace("/#/login")
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
 }
 
 function CreateMsg(props){
@@ -37,11 +32,7 @@ function CreateMsg(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>Add another account</button><br></br><br></br>
-<<<<<<< HEAD
      <button type="submit" className="btn btn-light" onClick={direct}>Go to Account Summary</button>
-=======
-     <button type="submit" className="btn btn-light" style={{backgroundColor: 'green'}} onClick={redirect}>Click to Login</button>
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
   </>);
 }
 
@@ -50,11 +41,7 @@ function CreateForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');  
   const ctx = React.useContext(UserContext);
-<<<<<<< HEAD
   
-=======
-
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
   function handle(){
     console.log(email,password);
     // ctx.users.push({firstName,lastName,email,password,balance:0});
@@ -63,13 +50,8 @@ function CreateForm(props){
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         var user = userCredential.user;
-<<<<<<< HEAD
         console.log('User successfuly created:', user);
         // window.location.replace('/#/deposit');
-=======
-        console.log(`User successfuly created: ${user}`);
-        // window.location.replace('/#/alldata');
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -83,14 +65,9 @@ function CreateForm(props){
       var data = await res.json();
       console.log(data); 
     })(); 
-<<<<<<< HEAD
     // Save the user in context
     ctx.setUser({ name: name, email: email });
     props.setShow(false);
-=======
-      // ctx.user({ name: name, email: email });
-      props.setShow(false);
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
   }    
 
   return (<>

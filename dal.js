@@ -2,11 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority';
 let db = null;
 
-<<<<<<< HEAD
 MongoClient.connect(url, function(err, client) {
-=======
-MongoClient.connect("mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority", function(err, client) {
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
     console.log('Connected successfully to the db server!');
 
     db = client.db('mybadbankcapstone');
@@ -65,7 +61,6 @@ function deposit(user, amount) {
         
     });
 }
-<<<<<<< HEAD
 
 
 function withdraw (user, amount) {
@@ -89,9 +84,6 @@ function withdraw (user, amount) {
         }
     });
 }
-=======
-
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
 
 function withdraw (user, amount) {
     const newTotal = user.balance - Number(amount);
@@ -101,7 +93,6 @@ function withdraw (user, amount) {
         try{
             const customers = db
             .collection('users')
-<<<<<<< HEAD
             .updateOne(
                 {name: name},
                 {email: email}, 
@@ -121,45 +112,6 @@ function findOne (name, email) {
             err ? reject(err): resolve(docs);
         });
 }
-=======
-            // .find({email: email}, {balance: amount})
-            .updateOne( 
-                {email: user.email},
-                {$set: {balance: newTotal}},
-            // .toArray(function(err, docs) {
-            // err ? reject(err): resolve(docs);
-        );
-        resolve(customers)
-        } catch(e) {
-            reject(e)
-        }
-    });
-}
-
-// function updateOne(name, email, balance) {
-//     return new Promise ((resolve, reject) => {
-//         const customers = db
-//             .collection('users')
-//             .updateOne(
-//                 {name: name},
-//                 {email: email}, 
-//                 {balance: amount}, 
-//                 {returnOriginal: false}, function(err, docs) {
-//                 err ? reject(err): resolve(docs);
-//             });
-//     });
-// }
-
-
-// function findOne (name, email) {
-//     const customers = db
-//         .collection('users')
-//         .find({name: name}, {email: email}, {balance: amount})
-//         .toArray(function(err, docs) {
-//             err ? reject(err): resolve(docs);
-//         });
-// }
->>>>>>> ed5a85e98a824cfc3d56b098dd4b51d0adf0ceeb
 
 
 function all() {

@@ -1,4 +1,4 @@
-function AllData() {
+function AllData(props) {
   const [data, setData] = React.useState('');
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
@@ -6,6 +6,7 @@ function AllData() {
   const [balance, setBalance] = React.useState('');
   const [email, setEmail] = React.useState('');
   const ctx = React.useContext(UserContext);
+  const [currentUser, setCurrentUser] = React.useState('');
   const { user } = ctx;
 
   const date = new Date(Date.now());
@@ -28,7 +29,7 @@ function AllData() {
       }, []);
 
   function LogoutMsg(props){
-    const currentUser = props.user.email;
+    // const currentUser = props.user.email;
     window.alert("You are logged out!");
     // window.location.replace("/#/");
     return(<>
@@ -54,7 +55,7 @@ function AllData() {
   return (
     <>
     <p>
-      As of {dateString} your balance is {ctx.user.balance}!
+    Hello ${currentUser}! As of {dateString} your balance is {ctx.user.balance}!
     </p>
     <div>
       <Card

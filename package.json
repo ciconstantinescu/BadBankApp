@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Project Title\r       BadBank Application",
   "main": "index.js",
+  "engines": {
+    "node": "12.11.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
 
   "keywords": [],

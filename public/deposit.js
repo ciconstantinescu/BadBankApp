@@ -1,8 +1,27 @@
 function Deposit(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
+  const [user, setUser] = React.useState('');
+  const ctx = React.useContext(UserContext);
+  const [balance, setBalance] = React.useState(ctx.user.balance);
+
+  // const user = ctx.users.find(user => user.email ==='carmen@mit.edu');
+ 
+  const date = new Date(Date.now());
+  const mm = date.getMonth() + 1; 
+  const dd = date.getDate();
+  const year = date.getFullYear();
+  const dateString = `${mm}/${dd}/${year}`;
+
+  // const balance = user.balance;
+  let currentBalance = `Current Account Balance: $ ${user.balance} `;
 
   return (
+    <>
+      <div>
+      <h5>{dateString}: Your current account balance is {ctx.user.balance}</h5>
+      </div>
+    <br></br><br></br>
     <Card
       bgcolor="warning"
       header="Deposit"
@@ -11,6 +30,7 @@ function Deposit(){
         <DepositForm setShow={setShow} setStatus={setStatus}/> :
         <DepositMsg setShow={setShow}/>}
     />
+    </>
   )
 }
 
@@ -26,21 +46,28 @@ function DepositMsg(props){
 } 
 
 function DepositForm(props){
-  const [user, setUser]     = React.useState('');
+  const [name, setName]     = React.useState('');
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');  
+  const ctx = React.useContext(UserContext);
 
   function handle(){
-    console.log(email,amount);
-    const url = `http://localhost:3000/account/deposit/${email}/${amount}`;
-      (async () => {
-        var res = await fetch(url);
-        var data = await res.text();
-        console.log(amount); 
-      })(); 
+    console.log(name,email,amount);
+    const url = `http://localhost:3000/account/deposit/${name}/${email}/${amount}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          ctx.user.balance += amount;
+          console.log('data', data);
+        }) 
   }
 
   return(<>
+    Name<br/>
+        <input type="input" 
+          className="form-control" 
+          placeholder="Enter name" 
+          value={name} onChange={e => setName(e.currentTarget.value)}/><br/>
 
     Email<br/>
     <input type="input" 
@@ -57,6 +84,5 @@ function DepositForm(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={handle}>Deposit</button>
-
   </>);
 }

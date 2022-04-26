@@ -1,0 +1,68 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "API Documentation",
+		"version": "1.0.0",
+		"title": "BadBank Capstone",
+		"license": {
+			"name": "MIT",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+
+	"host": "mybadbankcapstone.herokuapp.com",
+	"basePath": "/",
+	"tags": [
+		{
+			"name": "Accounts",
+			"description": "API documentation"
+			}
+		],
+	"schemes": [
+		"http",
+        "https"
+	],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/account/all": {
+            "get": {
+                "tags": ["Accounts"],
+                "summary": "Get all accounts in database",
+                "responses": {
+                    "200": {
+                        "description": "OK"                        
+                    }
+                }
+            }
+        },
+        "/account/create": {
+            "get": {
+                "tags": ["Accounts"],
+                "description": "Create new acount ",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "email": "body",
+                        "password": "password",
+                        "uid": "uid"
+                        
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    }
+                }
+            }
+        }
+    }
+}

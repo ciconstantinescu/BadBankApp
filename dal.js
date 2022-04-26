@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost: 27017';
+const url = 'mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority';
 let db = null;
 
-MongoClient.connect("mongodb://localhost:27017/", function(err, client) {
+MongoClient.connect(url, function(err, client) {
     console.log('Connected successfully to the db server!');
 
     db = client.db('badbank');
@@ -23,6 +23,7 @@ function find(email) {
         const customers = db
             .collection('users')
             .find({ email: email })
+            // change the toArray
             .toArray(function (err, docs) {
                 err ? reject(err) : resolve(docs);
             });
@@ -39,31 +40,65 @@ function login(email, password) {
     })
 }
 
-function deposit (email, amount) {
-    const newBalance = balance + Number(amount);
-    console.log(balance);
-  
-    const customers = db
-        .collection('users')
-        .find({email: email}, {balance: amount})
-        .toArray(function(err, docs) {
-            err ? reject(err): resolve(docs);
-        });
+function deposit(user, amount) {
+    const newBalance = user.balance + Number(amount);
+    console.log('newBalance' + newBalance);
+    return new Promise ((resolve, reject) => {
+        try{
+            const customers = db
+            .collection('users')
+            .updateOne(
+                // {name: user.name},
+                {email: user.email}, 
+                {$set: {balance: newBalance}}, 
+                // function(err, docs) {
+                // err ? reject(err): resolve(docs);
+            );
+        resolve(customers)
+        } catch(e) {
+            reject(e)
+        }
+        
+    });
 }
 
-function withdraw (email, amount) {
-    user.balance = user.balance - Number(amount);
-    console.log(user);
-    props.setStatus('');      
-    props.setShow(false);
 
-    const customers = db
-        .collection('users')
-        .find({email: email}, {balance: amount})
-        .toArray(function(err, docs) {
-            err ? reject(err): resolve(docs);
-        });
+function withdraw (user, amount) {
+    const newTotal = user.balance - Number(amount);
+    // user.balance = newTotal;
+    console.log('newTotal' + newTotal);
+    return new Promise ((resolve, reject) => {
+        try{
+            const customers = db
+            .collection('users')
+            // .find({email: email}, {balance: amount})
+            .updateOne( 
+                {email: user.email},
+                {$set: {balance: newTotal}},
+            // .toArray(function(err, docs) {
+            // err ? reject(err): resolve(docs);
+        );
+        resolve(customers)
+        } catch(e) {
+            reject(e)
+        }
+    });
 }
+
+function updateOne(name, email, balance) {
+    return new Promise ((resolve, reject) => {
+        const customers = db
+            .collection('users')
+            .updateOne(
+                {name: name},
+                {email: email}, 
+                {balance: amount}, 
+                {returnOriginal: false}, function(err, docs) {
+                err ? reject(err): resolve(docs);
+            });
+    });
+}
+
 
 function findOne (name, email) {
     const customers = db
@@ -74,19 +109,6 @@ function findOne (name, email) {
         });
 }
 
-function updateOne(name, email, balance) {
-    return new Promise ((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .findOneAndUpdateOne(
-                {name: name},
-                {email: email}, 
-                {balance: amount}, 
-                {returnOriginal: false}, function(err, docs) {
-                err ? reject(err): resolve(docs);
-            });
-    });
-}
 
 function all() {
     return new Promise((resolve, reject) => {
@@ -99,4 +121,4 @@ function all() {
     })
 }
 
-module.exports = {create, find, findOne, updateOne, all}
+module.exports = {create, find, deposit, withdraw, login, all}

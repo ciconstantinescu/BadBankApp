@@ -1,11 +1,27 @@
 {
-  "name": "capstonerecovered",
+  "name": "badbankapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.11.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "connect-timeout": "^1.9.0",
+    "cors": "^2.8.5",
+    "dal": "^0.1.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "firebase": "^9.6.11",
+    "mongodb": "^4.5.0",
+    "react-router-dom": "^6.3.0",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.3.0"
+  }
 }

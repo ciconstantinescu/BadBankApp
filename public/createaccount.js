@@ -44,14 +44,12 @@ function CreateAccount(){
   
     function handle(){
       console.log(email,password);
-      // ctx.users.push({firstName,lastName,email,password,balance:0});
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           var user = userCredential.user;
           console.log(`User successfuly created: ${user}`);
-          // window.location.replace('/#/deposit');
         })
         .catch((error) => {
           var errorCode = error.code;
@@ -65,7 +63,7 @@ function CreateAccount(){
         var data = await res.json();
         console.log(data); 
       })(); 
-      ctx.user({ name: name, email: email });
+      ctx.user = { name: name, email: email };
       props.setShow(false);
     }    
   

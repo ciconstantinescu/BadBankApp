@@ -10,7 +10,7 @@
 		}
 	},
 
-	"host": "mybadbankcapstone.herokuapp.com",
+	"host": "carmenconstantinescubadbankapp.herokuapp.com",
 	"basePath": "/",
 	"tags": [
 		{

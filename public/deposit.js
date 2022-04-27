@@ -56,6 +56,8 @@ function Deposit(){
           .then(data => {
             ctx.user.balance += amount;
             console.log('data' + data);
+            window.alert(`You deposited $${amount}!`);
+            window.location.replace('/#/alldata');
           }) 
     }
   

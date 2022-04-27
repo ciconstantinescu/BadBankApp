@@ -45,9 +45,11 @@ function AllData() {
 
   return (
     <>
+    <div style={{textAlign: "right"}}>
     <p>
-      As of {dateString} your balance is {ctx.user.balance}!
+      Welcome <strong>{user.name}</strong>! As of {dateString} your balance is {ctx.user.balance}!
     </p>
+    </div>
     <div>
     <table style={{textAlign: "right"}}>
       <td><a href="/#/deposit"><button>Deposit</button></a></td>

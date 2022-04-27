@@ -60,8 +60,10 @@ function Withdraw(){
           .then(response => response.json())
           .then(data => {
             console.log('data'+ data);
-            props.setBalance(ctx.user.balance - amount);
+            // props.setBalance(ctx.user.balance - amount);
             ctx.user.balance -= amount;
+            window.alert(`You made an withdrawal of $${amount}!`);
+            window.location.replace('/#/alldata');
           })
     }
   

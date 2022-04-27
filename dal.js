@@ -2,10 +2,10 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority';
 let db = null;
 
-MongoClient.connect(url, function(err, client) {
+MongoClient.connect("mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority", function(err, client) {
     console.log('Connected successfully to the db server!');
 
-    db = client.db('mybadbankcapstone');
+    db = client.db('badbank');
 });
 
 function create(name, email, password) {
@@ -84,6 +84,21 @@ function withdraw (user, amount) {
         }
     });
 }
+
+function updateOne(name, email, balance) {
+    return new Promise ((resolve, reject) => {
+        const customers = db
+            .collection('users')
+            .updateOne(
+                {name: name},
+                {email: email}, 
+                {balance: amount}, 
+                {returnOriginal: false}, function(err, docs) {
+                err ? reject(err): resolve(docs);
+            });
+    });
+}
+
 
 function findOne (name, email) {
     const customers = db

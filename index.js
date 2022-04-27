@@ -3,38 +3,10 @@ var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
-const swaggerJsdoc = require('swagger-jsdoc');
-
-const swaggerOptions = {
-    swaggerDefinition: {
-        info: {
-            title: 'BadBank App',
-            version: '1.0.0'
-        }
-    },
-    apis: ['index.js']
-};
-
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-/**
- * @swagger
- * /badbankbackend:
- *      get:
- *          description: Get user balance
- *          responses: carmen@mit.edu
- *              description: success
- */ 
-    
 app.use(express.static('public'));
 app.use(cors());
 
 app.get('/account/create/:name/:email/:password', function (req, res) {
-    console.log("Hello!");
     dal.create(req.params.name,req.params.email,req.params.password)
         .then((user) => {
             console.log(user);
@@ -130,6 +102,6 @@ app.get('/account/all', function (req, res) {
         });
 })
 
-var port = process.env.PORT || 3000;
+var port = 3000;
 app.listen(port);
 console.log('Running on port: ' + port);

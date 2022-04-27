@@ -1,4 +1,4 @@
-function AllData(props) {
+function AllData() {
   const [data, setData] = React.useState('');
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
@@ -6,17 +6,9 @@ function AllData(props) {
   const [balance, setBalance] = React.useState('');
   const [email, setEmail] = React.useState('');
   const ctx = React.useContext(UserContext);
-  const [currentUser, setCurrentUser] = React.useState('');
-  const { user } = ctx;
+  const { user } = ctx; 
 
-  const date = new Date(Date.now());
-  const mm = date.getMonth() + 1; 
-  const dd = date.getDate();
-  const year = date.getFullYear();
-  const dateString = `${mm}/${dd}/${year}`;
-
-  React.useEffect((props) => {
-    // ctx.users.find(user => user.email ==='carmen@mit.edu');
+  React.useEffect(() => {
         fetch('/account/find/' + user.email)
           .then(response => response.json())
           .then(data => {
@@ -29,9 +21,8 @@ function AllData(props) {
       }, []);
 
   function LogoutMsg(props){
-    // const currentUser = props.user.email;
+    const currentUser = props.user.email;
     window.alert("You are logged out!");
-    // window.location.replace("/#/");
     return(<>
       <h5>{`Hello ${currentUser}! Below is account summary as of ${dateString}:`}</h5>
     </>);
@@ -55,8 +46,18 @@ function AllData(props) {
   return (
     <>
     <p>
-    Hello ${currentUser}! As of {dateString} your balance is {ctx.user.balance}!
+      As of {dateString} your balance is {ctx.user.balance}!
     </p>
+    <div>
+    <table style={{textAlign: "right"}}>
+      <td><a href="/#/deposit"><button>Deposit</button></a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      <td><a href="/#/withdraw"><button>Withdraw</button></a></td>
+    </table>
+    </div>
     <div>
       <Card
           txtcolor="primary"

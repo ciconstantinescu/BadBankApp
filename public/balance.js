@@ -2,7 +2,7 @@ function Balance(props){
   const [user, setUser]     = React.useState('');
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
-  const [balance, setBalance] = React.useState(ctx.user.balance);
+  // const [balance, setBalance] = React.useState(ctx.user.balance);
 
   return (
     <Card
@@ -42,68 +42,24 @@ function Balance(props){
   // )
 
 
-
-function BalanceMsg(props){
-  return(<>
-    <h5>Success</h5>
-    <button type="submit" 
-      className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
-        Check balance again
-    </button>
-  </>);
-}
-
-function BalanceForm(props){
-  const [email, setEmail]   = React.useState('');
-  const [balance, setBalance] = React.useState('');  
-  const [user, setUser] = React.useState('');
-  const ctx = React.useContext(UserContext);  
+  function BalanceForm(props) {
+    const ctx = React.useContext(UserContext);  
+    const email = ctx.user.email;
+    const [balance, setBalance] = React.useState(0);  
   
-  // function handle(){
-  //     console.log(email,balance);
-  //     const url = `http://localhost:3000/account/balance/${email}/${balance}`;
-  //   //   (async () => {
-  //   //     var res = await fetch(url);
-  //   //     var data = await res.json();
-  //   //     console.log(data); 
-  //   //   })(); 
-  //   //   props.setShow(false);
-  
-  //   // if (!user) {
-  //   //   props.setStatus('fail!')      
-  //   //   return;     
-    
-  //   fetch(url)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log('data' + data);
-  //   }) 
-    
-
-  //   // setBalance(newBalance);
-  //   // console.log(user);
-  //   // props.setStatus('Your balance is: ' + newBalance);      
-  //   // props.setShow(false);
-  // }
-   function handle(props) {
-    fetch(`/account/updateBalance/${props.user.email}`)
-      .then(response => response.text())
-      .then(text => {
+    fetch(`/account/findOne/${email}`)
+    .then(response => response.text())
+    .then(text => {
         try {
-          const data = JSON.parse(text)
-          props.setStatus(data.balance)
-          props.setShow(false)
-          props.setBalance(data.balance)
-          console.log('JSON:', data)
-        } catch (err) {
-          props.setStatus(text)
-          console.log('err:', text)
+            const data = JSON.parse(text);
+            setBalance(data.balance);
+        } catch(err) {
+            console.log('err:', text);
         }
-      })
-  }
-
-  return (<>
+    });
+  
+    return (<>
+      <h5>Your current balance is ${parseFloat(balance).toFixed(2)}</h5>
 
     Email<br/>
     <input type="input" 

@@ -57,15 +57,38 @@ function Login(){
     
     function handleGoogle(){
       var provider = new firebase.auth.GoogleAuthProvider();
-      
+      provider.addScope("profile");
+      provider.addScope("email");
+
       firebase
       .auth()
       .signInWithPopup(provider)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        props.setUser(user);
-        props.setStatus("");
-        props.setShow(false);
+        .then((result) => {
+        const user = result.user;
+        console.log(user.email);
+        setShow(false);
+        setStatus(true);
+        ctx.user.email = user.email;
+        console.log(ctx);
+
+        fetch(`/account/findOne/${user.email}`)
+          .then((response) => response.text())
+          .then((text) => {
+            try {
+              const data = JSON.parse(text);
+            } catch (err) {
+              var user = firebase.auth().currentUser;
+              var displayName = user.displayName;
+              var userEmail = user.email;
+              var uid = user.uid;
+              const url = `/account/create/${displayName}/${userEmail}/${uid}`;
+              (async () => {
+                var res = await fetch(url);
+                var data = await res.json();
+                console.log(data);
+              })();
+            }
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -73,7 +96,7 @@ function Login(){
         console.log("one");
         props.setStatus("fail!");
       });  
-    }
+    }    
   
     return (<>
   

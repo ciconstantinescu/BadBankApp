@@ -3,6 +3,34 @@ var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: 'BadBank App',
+            version: '1.0.0'
+        }
+    },
+    apis: ['./index.js']
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+/**
+ * @swagger
+ * /badbankbackendold:
+ *      get:
+ *          description: Get user balance
+ *          responses: 
+ *              200:
+ *              description: success
+ */ 
+
 app.use(express.static('public'));
 app.use(cors());
 

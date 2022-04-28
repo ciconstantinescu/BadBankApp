@@ -104,15 +104,15 @@ function update(email, amount) {
     });
 }
 
-
-function findOne (name, email) {
-    const customers = db
-        .collection('users')
-        .find({name: name}, {email: email}, {balance: amount})
-        .toArray(function(err, docs) {
-            err ? reject(err): resolve(docs);
-        });
-}
+function findOne(email) {
+    return new Promise((resolve, reject) => {
+        const customers = db
+            .collection('users')
+            .findOne({ email: email })
+            .then((doc) => resolve(doc))
+            .catch((err) => reject(err));
+    })
+};
 
 
 function all() {
@@ -126,4 +126,4 @@ function all() {
     })
 }
 
-module.exports = {create, find, deposit, withdraw, login, all}
+module.exports = {create, findOne, find, deposit, withdraw, login, update, all}

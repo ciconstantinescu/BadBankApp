@@ -1,13 +1,13 @@
 require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://carmen:lolo33@badbankapp.w9xv5.mongodb.net/MyBadBankCapstone?retryWrites=true&w=majority';
+const url = 'mongodb://carmen:lolo33@badbankapp-shard-00-00.w9xv5.mongodb.net:27017,badbankapp-shard-00-01.w9xv5.mongodb.net:27017,badbankapp-shard-00-02.w9xv5.mongodb.net:27017/mybadbankcapstone?ssl=true&replicaSet=atlas-1u769d-shard-0&authSource=admin&retryWrites=true&w=majority';
 let db = null;
 
 MongoClient.connect(url, function(err, client) {
     console.log('Connected successfully to the db server!');
 
-    db = client.db('badbank');
+    db = client.db('badbankapp');
 });
 
 function create(name, email, password) {

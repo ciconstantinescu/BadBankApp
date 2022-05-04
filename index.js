@@ -58,7 +58,7 @@ app.get('/account/logout/:email', function (req, res) {
         });
     })
 
-app.get('/account/find/', function (req, res) {
+app.get('/account/find/:email', function (req, res) {
     dal.find(req.params.email)
         .then((user) => {
         console.log(user);
